@@ -1,6 +1,7 @@
 create database CineCol;
 use CineCol;
 
+-- creacion de tablas
 create table Director(
 id_director int auto_increment primary key,
 nombre varchar(50),
