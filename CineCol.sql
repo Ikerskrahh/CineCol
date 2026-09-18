@@ -29,7 +29,7 @@ director varchar(100),
 anio_estreno int(10),
 duracion varchar(50),
 id_genero int not null,
-id_director int default
+id_director int not null default 0,
 foreign key (id_genero) references Genero(id_genero),
 foreign key (id_director) references Director(id_director)
 );
