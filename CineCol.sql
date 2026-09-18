@@ -1,7 +1,7 @@
 drop database if exists CineCol;
 create database CineCol;
 use CineCol;
-
+ 
 -- creacion de tablas
 create table Director(
 id_director int auto_increment primary key,
@@ -11,18 +11,18 @@ edad int,
 fecha_nacimiento datetime,
 nacionalidad varchar(50)
 );
-
+ 
 create table Cajero(
 id_cajero int auto_increment primary key,
 nombre varchar(50),
 apellido varchar(50)
 );
-
+ 
 create table Genero(
 id_genero int auto_increment primary key, 
 nombre_genero varchar(50)
 );
-
+ 
 create table Pelicula(
 id_pelicula int auto_increment primary key,
 titulo varchar(100),
@@ -30,17 +30,21 @@ director varchar(100),
 anio_estreno int(10),
 duracion varchar(50),
 id_genero int not null,
+<<<<<<< HEAD
+id_director int null,
+=======
 id_director int not null,
+>>>>>>> d53b7f2728955eb71234f86b6015c8bbb8b852ae
 foreign key (id_genero) references Genero(id_genero),
 foreign key (id_director) references Director(id_director)
 );
-
+ 
 create table Sala(
 id_sala int auto_increment primary key,
 nombre_sala varchar(50),
 capacidad int not null check(capacidad>0)
 );
-
+ 
 create table Funcion(
 id_funcion int auto_increment primary key,
 id_sala int not null,
@@ -50,7 +54,7 @@ hora_funcion time,
 foreign key (id_sala) references Sala(id_sala),
 foreign key (id_pelicula) references Pelicula(id_pelicula)
 );
-
+ 
 create table Venta(
 id_venta int auto_increment primary key,
 id_cajero int not null,
@@ -61,11 +65,16 @@ foreign key (id_cajero) references Cajero(id_cajero),
 foreign key (id_funcion) references Funcion(id_funcion)
 );
 
+-- inserts 
 insert into Genero(nombre_genero) 
 values ('Accion'), ('Animacion'), ('Aventura'), ('Belico'), ('Ciencia ficcion'), ('Comedia'), ('Comedia dramatica'), 
   ('Crimen'), ('Docuficcion'), ('Documental'), ('Drama'), 
   ('Fantasia'), ('Ficcion'), ('Misterio'), ('Musical'), ('Romance'), ('Suspenso'), ('Terror'), ('Western');
+<<<<<<< HEAD
+ 
+=======
 
+>>>>>>> d53b7f2728955eb71234f86b6015c8bbb8b852ae
 insert into Pelicula(titulo, director, anio_estreno, duracion, id_genero)
 values ('9 DE ABRIL', 'Jairo Estrada / Erick Casanova', 2026, '80 min', 10),
 ('AA965 UN RESCATE IMPOSIBLE', 'Jörg Hiller García', 2026, '71 min', 10),
@@ -205,10 +214,20 @@ values ('9 DE ABRIL', 'Jairo Estrada / Erick Casanova', 2026, '80 min', 10),
 ('VOLAR', 'Jeiver Pinto Vargas', 2025, '79 min', 13),
 ('Yo soy otro', 'Oscar Campo', 2008, 'N/D', 11),
 ('YUCHE', 'Jairo Estrada / Santiago Vargas', 2026, '76 min', 10);
-
-SELECT p.titulo, g.nombre_genero, p.anio_estreno, p.duracion_minutos
-FROM pelicula p
-JOIN genero g ON p.id_genero = g.id_genero
-WHERE (p.titulo LIKE ?) 
-   OR (p.anio_estreno BETWEEN ? AND ?);
+ 
+-- Consulta que usa la aplicacion (los ? los llena Java con PreparedStatement)
+-- SELECT p.titulo, p.director, p.anio_estreno, p.duracion, g.nombre_genero
+-- FROM Pelicula p
+-- LEFT JOIN Genero g ON p.id_genero = g.id_genero
+-- WHERE p.titulo LIKE ?
+-- ORDER BY p.titulo;
+ 
+-- Verificacion rapida: deben salir 140 peliculas
+select count(*) as total_peliculas from Pelicula;
+ 
+select p.titulo, p.director, p.anio_estreno, p.duracion, g.nombre_genero
+from Pelicula p
+left join Genero g on p.id_genero = g.id_genero
+where p.titulo like '%amor%'
+order by
 
