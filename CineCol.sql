@@ -1,3 +1,4 @@
+drop database if exists CineCol;
 create database CineCol;
 use CineCol;
 
@@ -29,7 +30,7 @@ director varchar(100),
 anio_estreno int(10),
 duracion varchar(50),
 id_genero int not null,
-id_director int default
+id_director int not null,
 foreign key (id_genero) references Genero(id_genero),
 foreign key (id_director) references Director(id_director)
 );
@@ -47,7 +48,7 @@ id_pelicula int not null,
 fecha datetime, 
 hora_funcion time,
 foreign key (id_sala) references Sala(id_sala),
-foreign key (id_pelicula) references Pelicula(id_sala)
+foreign key (id_pelicula) references Pelicula(id_pelicula)
 );
 
 create table Venta(
@@ -65,7 +66,7 @@ values ('Accion'), ('Animacion'), ('Aventura'), ('Belico'), ('Ciencia ficcion'),
   ('Crimen'), ('Docuficcion'), ('Documental'), ('Drama'), 
   ('Fantasia'), ('Ficcion'), ('Misterio'), ('Musical'), ('Romance'), ('Suspenso'), ('Terror'), ('Western');
 
-insert into Peliculas(titulo, director, anio_estreno, duracion, id_genero)
+insert into Pelicula(titulo, director, anio_estreno, duracion, id_genero)
 values ('9 DE ABRIL', 'Jairo Estrada / Erick Casanova', 2026, '80 min', 10),
 ('AA965 UN RESCATE IMPOSIBLE', 'Jörg Hiller García', 2026, '71 min', 10),
 ('Agarrando pueblo', 'Luis Ospina y Carlos Mayolo', 1978, '28 min', 9),
