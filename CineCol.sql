@@ -205,5 +205,9 @@ values ('9 DE ABRIL', 'Jairo Estrada / Erick Casanova', 2026, '80 min', 10),
 ('Yo soy otro', 'Oscar Campo', 2008, 'N/D', 11),
 ('YUCHE', 'Jairo Estrada / Santiago Vargas', 2026, '76 min', 10);
 
-
+SELECT p.titulo, g.nombre_genero, p.anio_estreno, p.duracion_minutos
+FROM pelicula p
+JOIN genero g ON p.id_genero = g.id_genero
+WHERE (p.titulo LIKE ?) 
+   OR (p.anio_estreno BETWEEN ? AND ?);
 
